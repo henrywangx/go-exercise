@@ -1,0 +1,5 @@
+data:
+- path: "/baidu"
+  url: "https://www.baidu.com/"
+- path: "/sina"
+  url: "https://www.sina.com.cn/"
