@@ -43,7 +43,7 @@ func text(n *html.Node) string {
 	if n.Type == html.TextNode {
 		return n.Data
 	}
-	if n.Type == html.ElementNode {
+	if n.Type != html.ElementNode {
 		return ""
 	}
 	var ret string
