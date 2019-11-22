@@ -9,10 +9,10 @@ import (
 type ThirdGame struct {
 	Board
 	// count for used chess of a col
-	used         [colSum]int
+	used [colSum]int
 	// bit to represent whether current col is available
 	availableCol map[int]bool
-	winner string
+	winner       string
 }
 
 func (b *ThirdGame) Placement() {
@@ -32,7 +32,7 @@ func (b *ThirdGame) Placement() {
 
 func (b *ThirdGame) InitAvailableCol() {
 	b.availableCol = make(map[int]bool)
-	for col:=0; col<colSum; col++ {
+	for col := 0; col < colSum; col++ {
 		b.availableCol[col] = true
 	}
 }
@@ -62,16 +62,16 @@ func (b *ThirdGame) JudgeWin(row, col int) bool {
 	value := b.players[b.CurrentPlayerName()].value
 	// 1.vertical
 	var up, bottom int
-	if row>=3 {
-		up = row-3
+	if row >= 3 {
+		up = row - 3
 		bottom = 5
-	} 
-	if 3>row {
+	}
+	if 3 > row {
 		up = 0
-		bottom = row+3
+		bottom = row + 3
 	}
 	var cnt1 = 1
-	for i:=row-1; i>=up; i-- {
+	for i := row - 1; i >= up; i-- {
 		if b.placement[i][col] == value {
 			cnt1++
 		} else {
@@ -81,7 +81,7 @@ func (b *ThirdGame) JudgeWin(row, col int) bool {
 			return true
 		}
 	}
-	for j:=row+1; j<=bottom; j++ {
+	for j := row + 1; j <= bottom; j++ {
 		if b.placement[j][col] == value {
 			cnt1++
 		} else {
@@ -93,16 +93,16 @@ func (b *ThirdGame) JudgeWin(row, col int) bool {
 	}
 	// 2.horizontal
 	var left, right int
-	if col>=3 {
-		left = col-3
+	if col >= 3 {
+		left = col - 3
 		right = 6
-	} 
-	if 3>col {
+	}
+	if 3 > col {
 		left = 0
 		right = col + 3
 	}
 	var cnt2 = 1
-	for i:=col-1; i>=left; i-- {
+	for i := col - 1; i >= left; i-- {
 		if b.placement[row][i] == value {
 			cnt2++
 		} else {
@@ -112,7 +112,7 @@ func (b *ThirdGame) JudgeWin(row, col int) bool {
 			return true
 		}
 	}
-	for j:=col+1; j<=right; j++ {
+	for j := col + 1; j <= right; j++ {
 		if b.placement[row][j] == value {
 			cnt2++
 		} else {
@@ -120,11 +120,11 @@ func (b *ThirdGame) JudgeWin(row, col int) bool {
 		}
 		if cnt2 == 4 {
 			return true
-		}	
+		}
 	}
 	// 3.diagonal
-	var di = row-1
-	var dj = col-1
+	var di = row - 1
+	var dj = col - 1
 	var cnt3 = 1
 	for {
 		if di < up || dj < left {
@@ -141,8 +141,8 @@ func (b *ThirdGame) JudgeWin(row, col int) bool {
 		di--
 		dj--
 	}
-	di = row+1
-	dj = col+1
+	di = row + 1
+	dj = col + 1
 	for {
 		if di > bottom || dj > right {
 			break
@@ -158,10 +158,10 @@ func (b *ThirdGame) JudgeWin(row, col int) bool {
 		di++
 		dj++
 	}
-	
+
 	// 4.back-diagonal
-	var bi = row-1
-	var bj = col+1
+	var bi = row - 1
+	var bj = col + 1
 	var cnt4 = 1
 	for {
 		if bi < up || bj > right {
@@ -178,8 +178,8 @@ func (b *ThirdGame) JudgeWin(row, col int) bool {
 		bi--
 		bj++
 	}
-	bi = row+1
-	bj = col-1
+	bi = row + 1
+	bj = col - 1
 	for {
 		if bi > bottom || bj < left {
 			break
@@ -198,7 +198,7 @@ func (b *ThirdGame) JudgeWin(row, col int) bool {
 	return false
 }
 
-func (b *ThirdGame) NewTry() bool{
+func (b *ThirdGame) NewTry() bool {
 	randomCol := rand.Intn(colSum)
 	_, ok := b.availableCol[randomCol]
 	if !ok {

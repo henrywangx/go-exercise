@@ -9,10 +9,10 @@ import (
 type SecondGame struct {
 	Board
 	// count for used chess of a col
-	used         [colSum]int
+	used [colSum]int
 	// bit to represent whether current col is available
 	availableCol map[int]bool
-	winner string
+	winner       string
 }
 
 func (b *SecondGame) Placement() {
@@ -32,7 +32,7 @@ func (b *SecondGame) Placement() {
 
 func (b *SecondGame) InitAvailableCol() {
 	b.availableCol = make(map[int]bool)
-	for col:=0; col<colSum; col++ {
+	for col := 0; col < colSum; col++ {
 		b.availableCol[col] = true
 	}
 }
